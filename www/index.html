@@ -28,7 +28,7 @@
       </ion-header-bar>
       <ion-content ng-controller="ExampleController">
     <div class="list">
-        <div class="item" ng-repeat="(key, value) in beacons" ng-show="value.proximity === 'ProximityNear'">
+        <div class="item" ng-repeat="(key, value) in beacons | limitTo:1" ng-show="value.proximity === 'ProximityFar'">
 <!--             <div class="row">
                 <div class="col truncate">
                     {{value.uuid}}
@@ -49,9 +49,14 @@
             </div> -->
             <div class="row">
                 <div class="col">
-                    <h2 ng-if="value.proximity === 'ProximityNear'">You are in the <span ng-if="value.minor === 54599">Belfort Office</span><span ng-if="value.minor === 4137">Library</span><span ng-if="value.minor === 28584">Lounge</span></h2>
+                    <h2 ng-if="value.proximity === 'ProximityFar'">You are at Fort Work right now</h2>
                 </div>
             </div>
+           <!--  <div class="row">
+                <div class="col">
+                    <h2 ng-if="value.proximity === 'ProximityNear'">You are in the <span ng-if="value.minor === 54599">Belfort Office</span><span ng-if="value.minor === 4137">Library</span><span ng-if="value.minor === 28584">Kitchen</span></h2>
+                </div>
+            </div> -->
         </div>
     </div>
 </ion-content>
