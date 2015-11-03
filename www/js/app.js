@@ -6,31 +6,23 @@
 angular.module('starter', ['ionic','ngCordovaBeacon'])
 
 .run(function($ionicPlatform) {
-  $ionicPlatform.ready(function() {
-    // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
-    // for form inputs)
-    if(window.cordova && window.cordova.plugins.Keyboard) {
-      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-    }
-    if (window.cordova) {
-      alert("hey");
-    }
-    if(window.StatusBar) {
-      StatusBar.styleDefault();
-    }
-  });
+    $ionicPlatform.ready(function() {
+        if(window.cordova && window.cordova.plugins.Keyboard) {
+            cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+        }
+        if(window.StatusBar) {
+            StatusBar.styleDefault();
+        }
+    });
 })
-
+ 
 .controller("ExampleController", function($scope, $rootScope, $ionicPlatform, $cordovaBeacon) {
  
     $scope.beacons = {};
  
     $ionicPlatform.ready(function() {
-
-        console.log($cordovaBeacon);
  
         $cordovaBeacon.requestWhenInUseAuthorization();
- 
         $rootScope.$on("$cordovaBeacon:didRangeBeaconsInRegion", function(event, pluginResult) {
             var uniqueBeaconKey;
             for(var i = 0; i < pluginResult.beacons.length; i++) {
@@ -39,8 +31,7 @@ angular.module('starter', ['ionic','ngCordovaBeacon'])
             }
             $scope.$apply();
         });
- 
+        
         $cordovaBeacon.startRangingBeaconsInRegion($cordovaBeacon.createBeaconRegion("estimote", "b9407f30-f5f8-466e-aff9-25556b57fe6d"));
- 
     });
 });

@@ -14,7 +14,7 @@
 
     <!-- ionic/angularjs js -->
     <script src="lib/ionic/js/ionic.bundle.js"></script>
-
+    
 
     <!-- cordova script (this will be a 404 during development) -->
     <script src="cordova.js"></script>
@@ -28,8 +28,8 @@
       </ion-header-bar>
       <ion-content ng-controller="ExampleController">
     <div class="list">
-        <div class="item" ng-repeat="(key, value) in beacons">
-            <div class="row">
+        <div class="item" ng-repeat="(key, value) in beacons" ng-show="value.proximity === 'ProximityNear'">
+<!--             <div class="row">
                 <div class="col truncate">
                     {{value.uuid}}
                 </div>
@@ -39,12 +39,17 @@
                     major: {{value.major}}
                 </div>
                 <div class="col">
-                    minor: {{value.minor}}
+                    minor: <span ng-if="value.minor === 54599">Belfort Office</span><span ng-if="value.minor !== 54599">{{value.minor}}</span>
                 </div>
             </div>
             <div class="row">
                 <div class="col">
                     {{value.proximity}}
+                </div>
+            </div> -->
+            <div class="row">
+                <div class="col">
+                    <h2 ng-if="value.proximity === 'ProximityNear'">You are in the <span ng-if="value.minor === 54599">Belfort Office</span><span ng-if="value.minor === 4137">Library</span><span ng-if="value.minor === 28584">Lounge</span></h2>
                 </div>
             </div>
         </div>
